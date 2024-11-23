@@ -118,7 +118,7 @@
 ### 2.1 Intro
 ---
 
-#### Fair Comparison Within and Across Categories
+#### 2.1.1. Fair Comparison Within and Across Categories
 - **Limitations of Existing Studies**:
   - 大多数最新研究仅比较部分方法.
   - 不同方法遵循不同协议:
@@ -138,7 +138,7 @@
 
 ---
 
-#### Comprehensive Evaluation on Representative Datasets
+#### 2.1.2. Comprehensive Evaluation on Representative Datasets
 - **Dataset Categories**:
   - **Cross-lingual Benchmarks**:
     - 例如: DBP15K.
@@ -159,7 +159,7 @@
 
 ---
 
-#### New Dataset for Real-Life Challenges
+#### 2.1.3. New Dataset for Real-Life Challenges
 - **Challenges in Existing Datasets**:
   1. 假设每个源 KG 的实体在目标 KG 中都有对应实体, 但实际中并非如此.
      - 例如: YAGO 4 和 IMDB 中, YAGO 4 的大部分实体 (99%) 无法在 IMDB 中匹配.
@@ -176,7 +176,7 @@
 ---
 
 
-## Main Contributions of This Chapter
+#### 2.1.4. Main Contributions of This Chapter
 1. **Comprehensive Evaluation**:
    - 提供对最先进 EA 方法的全面评估:
      1. 识别现有方法的主要组成部分, 提出一个通用 EA 框架.
@@ -195,12 +195,14 @@
 
 ### 2.2 A General EA Framework
 
-本节提出了一个通用的 **Entity Alignment (EA)** 框架, 用于涵盖最先进的 EA 方法. 通过对当前 EA 方法的深入分析, 我们识别出了以下四个主要组件, 如 Fig 所示:
+本节提出了一个通用的 **Entity Alignment (EA)** 框架, 用于涵盖最先进的 EA 方法. 通过对当前 EA 方法的深入分析, 我们识别出了以下四个主要组件, 如 Fig 2.1所示:
 
+<figure style="display: block; text-align: center;">
+  <img src="FL/2024_11_23/2_1.png" alt="A general EA framework" style="display: block; margin: auto; width: 50%; height: auto;">
+  <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Figure 2.1: A general EA framework</figcaption>
+</figure>
 
-<img src="FL/2024_11_23/2_1.png" alt="A general EA framework" style="display: block; margin: auto; width: 50%; height: auto;">
-
-#### 1. Embedding Learning Module
+#### 2.2.1. Embedding Learning Module
 - **功能**: 为实体train embeddings.
 - **两种主要方法**: 
   - 基于 **KG Representation** 的模型:
@@ -208,7 +210,7 @@
   - 基于 **Graph Neural Network (GNN)** 的模型:
     - 例如: **Graph Convolutional Network (GCN)**.
 
-#### 2. Alignment Module
+#### 2.2.2. Alignment Module
 - **功能**: 将上一模块中学习到的实体嵌入在不同 KGs 中对齐, 目标是将这些嵌入映射到统一的空间.
 - **两种常用approach**:
   - **Margin-based Loss (基于边界的损失)**:
@@ -216,13 +218,50 @@
   - **Corpus Fusion (语料融合)**:
     - 在语料级别对齐 KGs, 并直接将不同 KGs 的实体嵌入到同一向量空间.
 
-#### 3. Prediction Module
+#### 2.2.3. Prediction Module
 - **功能**: 在建立统一的嵌入空间后, 预测test集中每个源实体对应的目标实体.
 - **常用方法**:
   - 基于距离的相似度测量:
     - **Cosine Similarity** (余弦相似度).
     - **Manhattan Distance** (曼哈顿距离).
     - **Euclidean Distance** (欧几里得距离).
+  - The target entity with the highest similarity (or lowest distance) is then selected as the counterpart
+
+
+#### 2.2.4. Extra Information Module
+- **功能**: 在基本模块之外, 一些 EA 方法利用额外的信息来提升性能.
+- **常用方法**:
+  - **Bootstrapping (自举)**:
+    - 使用高置信度的对齐结果作为训练数据, 进行后续迭代对齐.
+  - **Multi-type Literal Information (多类型文本信息)**:
+    - 结合属性 (attributes), 实体描述 (entity descriptions), 和实体名称 (entity names), 补充 KG 的结构信息.
+  - **表示方式**:
+    - 这些附加信息以蓝色虚线在 Fig 2.1中表示.
+
+##### 2.2.4.* Example
+进一步结合第 1 章中的示例, 我们解释这些模块的具体作用:
+
+1. **Embedding Learning Module**:
+   - 生成 **KG(EN)** 和 **KG(ES)** 中实体的嵌入表示.
+
+2. **Alignment Module**:
+   - 将实体嵌入映射到同一向量空间中, 使得 **KG(EN)** 和 **KG(ES)** 中的实体嵌入可以直接进行比较.
+
+3. **Prediction Module**:
+   - 利用统一的嵌入, 为 **KG(EN)** 中的每个源实体预测 **KG(ES)** 中的等价目标实体.
+
+4. **Extra Information Module**:
+   - 使用多种技术来提升 EA 的性能:
+     - **Bootstrapping Strategy (自举策略)**:
+       - 将上一轮中检测到的高置信度 EA 对 (例如: (Spain, España)) 添加到训练集中, 用于下一轮学习.
+     - **Additional Textual Information (额外文本信息)**:
+       - 使用补充的文本信息 (例如实体描述或属性) 来增强实体嵌入的对齐效果.
+
+#### Organization of State-of-the-Art Approaches
+- 根据 EA 框架中的各模块对最先进的方法进行了分类, 并将它们呈现在 **Table 2.1** 中.
+- 有关这些方法的更详细信息, 读者可以参考附录.
+- 接下来, 我们将解释这些模块如何在各种最先进的方法中实现.
+<figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/2024-11-23-23-08-34.png" alt="Table 2.1" style="display: block; margin: auto; width: 50%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 2.1: A summary of the EA approaches</figcaption> </figure>
 
 
 ## 4. 文章实验
