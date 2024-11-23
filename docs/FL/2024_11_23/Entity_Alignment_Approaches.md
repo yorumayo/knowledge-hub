@@ -49,7 +49,7 @@
   - **目标**: Identify equivalent entity pairs in the test set.
 
 ###### 1.1.2.1.* Example
-![alt text](FL/2024_11_23/EA_1.png)
+![alt text](EA_1.png)
 <!-- <img src="" alt="EA" style="display: block; margin: auto; width: 50%; height: auto;"> -->
 
 - **Context**:
