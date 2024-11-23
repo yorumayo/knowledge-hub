@@ -48,9 +48,9 @@
   - **Seed Entity Pairs** (训练集): \( S = \{(u, v) | u \in E_1, v \in E_2, u \leftrightarrow v \} \), 其中 \( u \leftrightarrow v \) 表示等价关系（即 \( u \) 和 \( v \) 指代同一现实世界对象）.
   - **目标**: Identify equivalent entity pairs in the test set.
 
-###### Example
-
-<img src="FL/2024_11_23/EA_1.png" alt="EA" style="display: block; margin: auto; width: 50%; height: auto;">
+###### 1.1.2.1.* Example
+![alt text](FL/2024_11_23/EA_1.png)
+<!-- <img src="" alt="EA" style="display: block; margin: auto; width: 50%; height: auto;"> -->
 
 - **Context**:
   - 对齐英语知识图谱 (\( KG_{EN} \)) 和西班牙语知识图谱 (\( KG_{ES} \)) 中的实体.
