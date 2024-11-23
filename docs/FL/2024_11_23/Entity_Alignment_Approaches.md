@@ -16,9 +16,9 @@
    * triples内在互联(inherently interconnected)
    * e.g. https://dbpedia.org/page/Spain
 2. Core Compononets
-   * Entity Set (E): 图中的所有节点，对应现实中的唯一对象
+   * Entity Set (E): 图中的所有节点, 对应现实中的唯一对象
    * Relation Set (R): 描述实体间的关系类型
-   * Triple Set (T): 表示图中的有向边，T ⊆ E × R × E
+   * Triple Set (T): 表示图中的有向边, T ⊆ E × R × E
    * 单个三元组 (h, r, t) 表示头实体 h 与尾实体 t 通过关系 r 的连接
 3. Types of KGS
    * General KG
@@ -41,11 +41,11 @@
 
 ##### 1.1.2.1. Definition
 - **Purpose**:
-  - 实体对齐（EA）的目标是识别不同知识图谱（KGs）中等价的实体，从而实现不同来源知识的整合。
+  - 实体对齐（EA）的目标是识别不同知识图谱（KGs）中等价的实体, 从而实现不同来源知识的整合.
 - **Definition**:
   - **Source Knowledge Graph (KG)**: \( G_1 = (E_1, R_1, T_1) \)
   - **Target Knowledge Graph (KG)**: \( G_2 = (E_2, R_2, T_2) \)
-  - **Seed Entity Pairs** (训练集): \( S = \{(u, v) | u \in E_1, v \in E_2, u \leftrightarrow v \} \)，其中 \( u \leftrightarrow v \) 表示等价关系（即 \( u \) 和 \( v \) 指代同一现实世界对象）。
+  - **Seed Entity Pairs** (训练集): \( S = \{(u, v) | u \in E_1, v \in E_2, u \leftrightarrow v \} \), 其中 \( u \leftrightarrow v \) 表示等价关系（即 \( u \) 和 \( v \) 指代同一现实世界对象）.
   - **目标**: Identify equivalent entity pairs in the test set.
 
 ###### Example
@@ -53,12 +53,12 @@
 <img src="FL/2024_11_23/EA_1.png" alt="EA" style="display: block; margin: auto; width: 50%; height: auto;">
 
 - **Context**:
-  - 对齐英语知识图谱 (\( KG_{EN} \)) 和西班牙语知识图谱 (\( KG_{ES} \)) 中的实体。
+  - 对齐英语知识图谱 (\( KG_{EN} \)) 和西班牙语知识图谱 (\( KG_{ES} \)) 中的实体.
 - **Given**:
-  - **Seed Entity Pair**: “Mexico” (\( KG_{EN} \)) ↔ “Mexico” (\( KG_{ES} \))。
+  - **Seed Entity Pair**: “Mexico” (\( KG_{EN} \)) ↔ “Mexico” (\( KG_{ES} \)).
   - **目标**: Given the seed entity pair, EA aims to find the equivalent entity pairs in the test set, e.g., returning Roma(ciudad) in KG(ES) as the corresponding target entity to the source entity Roma(city) in KG(EN).
 - **Entity Uniqueness**:
-  - Each entity is uniquely identified, 例如 “Roma(film)” 和 “Roma(city)” 是不同的实体。
+  - Each entity is uniquely identified, 例如 “Roma(film)” 和 “Roma(city)” 是不同的实体.
 
 ##### 1.1.2.2. Method
 
@@ -77,7 +77,7 @@
 
 ### 1.2 Related Works
 
-虽然EA问题是近年来才被提出的，但这一问题的更通用版本——识别来自不同数据源的、指向同一现实世界实体的记录——已经被不同领域的研究社区从多个角度进行了深入研究，并使用了不同的名称，包括实体解析(Entity Resolution, ER)、实体匹配(Entity Matching)、记录链接(Record Linkage)、去重(Deduplication)、实例/本体匹配(Instance/Ontology Matching)、链接发现(Link Discovery) 以及实体链接/消歧(Entity Linking/Entity Disambiguation)。接下来是对其中部分相关工作的描述.
+虽然EA问题是近年来才被提出的, 但这一问题的更通用版本——识别来自不同数据源的、指向同一现实世界实体的记录——已经被不同领域的研究社区从多个角度进行了深入研究, 并使用了不同的名称, 包括实体解析(Entity Resolution, ER)、实体匹配(Entity Matching)、记录链接(Record Linkage)、去重(Deduplication)、实例/本体匹配(Instance/Ontology Matching)、链接发现(Link Discovery) 以及实体链接/消歧(Entity Linking/Entity Disambiguation).接下来是对其中部分相关工作的描述.
 
 #### 1.2.1 Entity Linking (EL)
 - **Definition**:
@@ -124,7 +124,8 @@
   - 不同方法遵循不同协议:
     - 一些仅使用 **Knowledge Graph (KG)** 的结构进行对齐.
     - 一些结合了额外信息.
-    - 一些执行单次对齐.
+    - 一些执行单次对齐(one-pass alignment).
+      - 模型从输入数据中直接生成对齐结果, 而不需要进一步的优化循环或重新训练.常用于简单的规则匹配方法或非迭代模型.
     - 一些采用迭代 (或重新训练) 策略.
   - 文献中的直接比较突出整体有效性, 但缺乏分类内及分类间的公平比较.
 
@@ -217,7 +218,7 @@
 
 #### 3. Prediction Module
 - **功能**: 在建立统一的嵌入空间后, 预测test集中每个源实体对应的目标实体.
-- **常用方法**: 
+- **常用方法**:
   - 基于距离的相似度测量:
     - **Cosine Similarity** (余弦相似度).
     - **Manhattan Distance** (曼哈顿距离).
