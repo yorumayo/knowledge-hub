@@ -8,8 +8,8 @@
 > https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9174835<br>
 > https://link.springer.com/chapter/10.1007/978-981-99-4250-3_1<br>
 ---
-### 1.1.  Background
-#### 1.1.1. KG
+## 1.1.  Background
+### 1.1.1. KG
 1. 存储形式
    * triples <entity, relation, entity>
    * 每个entity对应一个unique object in the real world, relations描述这些对象之间的联系
@@ -37,9 +37,9 @@
      * Combine information from other KGs to address gaps or complement existing data.
      * Example: A general KG might only include basic details about a scientist. A domain-specific KG could provide additional details, such as biographies and publication lists.
 
-#### 1.1.2. EA
+### 1.1.2. EA
 
-##### 1.1.2.1. Definition
+#### 1.1.2.1. Definition
 - **Purpose**:
   - 实体对齐（EA）的目标是识别不同知识图谱（KGs）中等价的实体, 从而实现不同来源知识的整合.
 - **Definition**:
@@ -48,9 +48,9 @@
   - **Seed Entity Pairs** (训练集): \( S = \{(u, v) | u \in E_1, v \in E_2, u \leftrightarrow v \} \), 其中 \( u \leftrightarrow v \) 表示等价关系（即 \( u \) 和 \( v \) 指代同一现实世界对象）.
   - **目标**: Identify equivalent entity pairs in the test set.
 
-###### 1.1.2.1.* Example
-![alt text](EA_1.png)
-<!-- <img src="" alt="EA" style="display: block; margin: auto; width: 50%; height: auto;"> -->
+##### 1.1.2.1.* Example
+
+<img src="FL/2024_11_23/EA_1.png" alt="EA" style="display: block; margin: auto; width: 50%; height: auto;">
 
 - **Context**:
   - 对齐英语知识图谱 (\( KG_{EN} \)) 和西班牙语知识图谱 (\( KG_{ES} \)) 中的实体.
@@ -60,7 +60,7 @@
 - **Entity Uniqueness**:
   - Each entity is uniquely identified, 例如 “Roma(film)” 和 “Roma(city)” 是不同的实体.
 
-##### 1.1.2.2. Method
+#### 1.1.2.2. Method
 
 1. **Assumption**:
    - Entities that are equivalent in different KGs share **similar local structures** (e.g., neighbors and relationships).
@@ -75,11 +75,11 @@
      - Based on the distance, it is determined whether two entities are equivalent or not.
 
 
-### 1.2 Related Works
+## 1.2 Related Works
 
 虽然EA问题是近年来才被提出的, 但这一问题的更通用版本——识别来自不同数据源的、指向同一现实世界实体的记录——已经被不同领域的研究社区从多个角度进行了深入研究, 并使用了不同的名称, 包括实体解析(Entity Resolution, ER)、实体匹配(Entity Matching)、记录链接(Record Linkage)、去重(Deduplication)、实例/本体匹配(Instance/Ontology Matching)、链接发现(Link Discovery) 以及实体链接/消歧(Entity Linking/Entity Disambiguation).接下来是对其中部分相关工作的描述.
 
-#### 1.2.1 Entity Linking (EL)
+### 1.2.1 Entity Linking (EL)
 - **Definition**:
   - Entity Linking (EL) 或 Entity Disambiguation 的过程是指在自然语言文本中识别实体提及 (Entity Mentions) 并将其链接到给定参考目录中的对应实体, 这个参考目录通常是一个KG. 该过程包括确定文本中的某个具体提及指代的是哪个实体. 例如, 给定单词 “Rome”, 任务是确定它是指意大利的城市, 一部电影, 还是其他实体, 并将其链接到参考目录中的正确实体.
 - **Techniques**:
@@ -93,7 +93,7 @@
 
 ---
 
-#### 1.2.2 Entity Resolution (ER)
+### 1.2.2 Entity Resolution (ER)
 - **Definition**:
   - Entity resolution, 也被称为 entity matching, deduplication, 或 record linkage, 假设输入数据是关系型数据, 每个数据对象通常包含大量通过多个属性描述的文本信息. 因此, 在 entity resolution 中, 各种相似度或距离函数被用来衡量两个对象之间的相似性. 基于相似度的测量, 可以采用基于规则的或基于机器学习的方法(Rule-based or machine-learning-based)来将两个对象分类为 matching 或 non-matching.
 - **Process**:
@@ -108,17 +108,17 @@
 
 ---
 
-#### 1.2.3 Entity Resolution on KGs
+### 1.2.3 Entity Resolution on KGs
 
-## 2. SOTA approaches
+# 2. SOTA approaches
 > 提出了一个涵盖所有现有方法的广泛 EA 框架, 并将这些方法分为三大类<br>
 > 在各种场景下对这些解决方案进行了评估, 考虑了它们的有效性 (efficacy), 效率 (efficiency), 和可扩展性 (scalability).<br>
 > 创建了一个新的 EA 数据集, 该数据集反映了对齐过程中实际遇到的困难, 而这些困难在现有文献中大多被忽略<br>
 
-### 2.1 Intro
+## 2.1 Intro
 ---
 
-#### 2.1.1. Fair Comparison Within and Across Categories
+### 2.1.1. Fair Comparison Within and Across Categories
 - **Limitations of Existing Studies**:
   - 大多数最新研究仅比较部分方法.
   - 不同方法遵循不同协议:
@@ -138,7 +138,7 @@
 
 ---
 
-#### 2.1.2. Comprehensive Evaluation on Representative Datasets
+### 2.1.2. Comprehensive Evaluation on Representative Datasets
 - **Dataset Categories**:
   - **Cross-lingual Benchmarks**:
     - 例如: DBP15K.
@@ -159,7 +159,7 @@
 
 ---
 
-#### 2.1.3. New Dataset for Real-Life Challenges
+### 2.1.3. New Dataset for Real-Life Challenges
 - **Challenges in Existing Datasets**:
   1. 假设每个源 KG 的实体在目标 KG 中都有对应实体, 但实际中并非如此.
      - 例如: YAGO 4 和 IMDB 中, YAGO 4 的大部分实体 (99%) 无法在 IMDB 中匹配.
@@ -176,7 +176,7 @@
 ---
 
 
-#### 2.1.4. Main Contributions of This Chapter
+### 2.1.4. Main Contributions of This Chapter
 1. **Comprehensive Evaluation**:
    - 提供对最先进 EA 方法的全面评估:
      1. 识别现有方法的主要组成部分, 提出一个通用 EA 框架.
@@ -193,7 +193,7 @@
      - **Ambiguous Entity Names**.
    - 作为更有效的基准, 为评估 EA 系统提供支持.
 
-### 2.2 A General EA Framework
+## 2.2. A General EA Framework
 
 本节提出了一个通用的 **Entity Alignment (EA)** 框架, 用于涵盖最先进的 EA 方法. 通过对当前 EA 方法的深入分析, 我们识别出了以下四个主要组件, 如 Fig 2.1所示:
 
@@ -202,7 +202,7 @@
   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Figure 2.1: A general EA framework</figcaption>
 </figure>
 
-#### 2.2.1. Embedding Learning Module
+#### 2.2.0.1. Embedding Learning Module
 - **功能**: 为实体train embeddings.
 - **两种主要方法**: 
   - 基于 **KG Representation** 的模型:
@@ -210,7 +210,7 @@
   - 基于 **Graph Neural Network (GNN)** 的模型:
     - 例如: **Graph Convolutional Network (GCN)**.
 
-#### 2.2.2. Alignment Module
+#### 2.2.0.2. Alignment Module
 - **功能**: 将上一模块中学习到的实体嵌入在不同 KGs 中对齐, 目标是将这些嵌入映射到统一的空间.
 - **两种常用approach**:
   - **Margin-based Loss (基于边界的损失)**:
@@ -218,7 +218,7 @@
   - **Corpus Fusion (语料融合)**:
     - 在语料级别对齐 KGs, 并直接将不同 KGs 的实体嵌入到同一向量空间.
 
-#### 2.2.3. Prediction Module
+#### 2.2.0.3. Prediction Module
 - **功能**: 在建立统一的嵌入空间后, 预测test集中每个源实体对应的目标实体.
 - **常用方法**:
   - 基于距离的相似度测量:
@@ -228,7 +228,7 @@
   - The target entity with the highest similarity (or lowest distance) is then selected as the counterpart
 
 
-#### 2.2.4. Extra Information Module
+#### 2.2.0.4. Extra Information Module
 - **功能**: 在基本模块之外, 一些 EA 方法利用额外的信息来提升性能.
 - **常用方法**:
   - **Bootstrapping (自举)**:
@@ -238,7 +238,7 @@
   - **表示方式**:
     - 这些附加信息以蓝色虚线在 Fig 2.1中表示.
 
-##### 2.2.4.* Example
+##### 2.2.0.4.* Example
 进一步结合第 1 章中的示例, 我们解释这些模块的具体作用:
 
 1. **Embedding Learning Module**:
@@ -257,11 +257,75 @@
      - **Additional Textual Information (额外文本信息)**:
        - 使用补充的文本信息 (例如实体描述或属性) 来增强实体嵌入的对齐效果.
 
-#### Organization of State-of-the-Art Approaches
+#### 2.2.0.5. Organization of State-of-the-Art Approaches
 - 根据 EA 框架中的各模块对最先进的方法进行了分类, 并将它们呈现在 **Table 2.1** 中.
 - 有关这些方法的更详细信息, 读者可以参考附录.
 - 接下来, 我们将解释这些模块如何在各种最先进的方法中实现.
-<figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/2024-11-23-23-08-34.png" alt="Table 2.1" style="display: block; margin: auto; width: 50%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 2.1: A summary of the EA approaches</figcaption> </figure>
+<figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/2024-11-23-23-08-34.png" alt="Table 2.1" style="display: block; margin: auto; width: 50%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 2.1: A summary of EA approaches</figcaption> </figure>
+
+### 2.2.1 Embedding Learning Module
+
+在本节中, 我们将解释 **Embedding Learning Module** 中使用的技术, 这些技术利用知识图谱 (KG) 的结构为每个实体创建嵌入表示. **Table 2.1** 显示, 此模块中最常用的模型是 **TransE** 和 **Graph Convolutional Network (GCN)**. 我们将简要介绍这些基础模型.
+
+#### **1. TransE**
+- **方法概述**:
+  - **TransE** 将关系视为在低维空间中作用于实体嵌入的平移.
+  - 给定一个关系三元组 (h, r, t), TransE 假设尾实体 t 的嵌入表示应该接近头实体 h 和关系 r 嵌入表示的和, 即 \( h + r \approx t \).
+- **特点**:
+  - 保留实体的结构信息.
+  - 在嵌入空间中为具有相似邻居的实体生成相近的表示.
+
+#### **2. GCN**
+- **方法概述**:
+  - **GCN** 是一种直接处理基于图数据的卷积网络.
+  - 它通过编码节点邻域的信息为每个节点创建嵌入表示.
+- **工作流程**:
+  1. 输入:
+     - 每个节点的特征向量.
+     - 图结构的矩阵表示 (如邻接矩阵).
+  2. 输出:
+     - 新的特征矩阵, 表示节点嵌入.
+  3. 模型结构:
+     - 典型的 GCN 模型由多个堆叠的 GCN 层组成.
+     - 允许捕获从目标实体多跳远的局部 KG 结构.
+
+---
+
+#### **3. 基于 TransE 的改进方法**
+- **MTransE**: 移除了训练中的负三元组.
+- **BootEA** 和 **NAEA**: 用基于限制的目标函数替代了原始的基于边界的损失函数.
+- **MuGNN**: 用逻辑回归损失代替边界损失.
+- **JAPE**: 设计了新的损失函数.
+
+#### **4. 基于 GCN 的改进方法**
+- **GCN 限制**: 
+  - 原始 GCN 模型未考虑 KG 中的关系信息.
+- **改进方法**:
+  - **RDGCN**:
+    - 使用双原图卷积神经网络 (Dual-Primal Graph Convolutional Neural Network, DPGCNN) 来补充关系信息.
+  - **MuGNN**:
+    - 利用基于注意力的 GNN 模型, 为邻居节点分配不同的权重.
+  - **KECG**:
+    - 将图注意力网络 (**Graph Attention Network, GAT**) 和 **TransE** 结合, 同时捕获图内结构信息和图间对齐信息.
+
+---
+
+#### **5. 新型嵌入模型**
+- **RSNs**:
+  - 问题:
+    - 三元组级别的学习无法捕获实体之间的长期关系依赖.
+    - 无法在实体之间传播语义信息.
+  - 解决方案:
+    - 使用残差学习的循环神经网络 (**Recurrent Neural Networks, RNNs**) 来学习实体之间的长期关系路径.
+
+- **TransEdge**:
+  - 提出了新的能量函数, 用于测量实体嵌入间的边平移误差.
+  - 方法:
+    - 使用上下文压缩和投影对边嵌入进行建模.
+
+---
+
+本节总结了现有的嵌入学习方法及其改进, 并展示了它们在不同任务中的适配能力.
 
 
 ## 4. 文章实验
