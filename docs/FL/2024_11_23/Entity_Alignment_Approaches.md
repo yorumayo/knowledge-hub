@@ -42,11 +42,11 @@
 
 1.1.2.1. Definition
 - **Purpose**:
-  - 实体对齐（EA）的目标是识别不同知识图谱（KGs）中等价的实体, 从而实现不同来源知识的整合.
+  - 实体对齐(EA)的目标是识别不同知识图谱(KGs)中等价的实体, 从而实现不同来源知识的整合.
 - **Definition**:
   - **Source Knowledge Graph (KG)**: \( G_1 = (E_1, R_1, T_1) \)
   - **Target Knowledge Graph (KG)**: \( G_2 = (E_2, R_2, T_2) \)
-  - **Seed Entity Pairs** (训练集): \( S = \{(u, v) | u \in E_1, v \in E_2, u \leftrightarrow v \} \), 其中 \( u \leftrightarrow v \) 表示等价关系（即 \( u \) 和 \( v \) 指代同一现实世界对象）.
+  - **Seed Entity Pairs** (训练集): \( S = \{(u, v) | u \in E_1, v \in E_2, u \leftrightarrow v \} \), 其中 \( u \leftrightarrow v \) 表示等价关系(即 \( u \) 和 \( v \) 指代同一现实世界对象).
   - **目标**: Identify equivalent entity pairs in the test set.
 
 1.1.2.1.* Example
@@ -578,7 +578,7 @@ e^l_i = \text{Aggregation}_{\forall j \in N(i)} \big( \text{Attention}(i, j) \cd
 - **Aggregation**: 将邻域信息与注意力权重整合.
 
 #### 3.2.1 ALiNet
-> （Alignment-aware Network）<br>
+> (Alignment-aware Network)<br>
 > 解决KG中neighboring structure的非同构性问题<br>
 > It aims to aggregate multi-hop structural information for learning entity representations
 
@@ -591,18 +591,18 @@ learning process
 
 
 #### 3.2.3 RREA
-> （Relation-aware Entity Alignment）通过引入关系感知的图注意力网络<br>
+> (Relation-aware Entity Alignment)通过引入关系感知的图注意力网络<br>
 > 采用自注意力机制，将实体信息传播到关系，再将关系信息聚合回实体<br>
 > It proposes to use relational reflection transformation to aggregate features for
 learning entity representations
 
 #### 3.2.4 RPR-RHGT
-> （Relation-Path Reasoning with Relational Heterogeneous Graph Transformer）结合关系路径推理和异构图转换器<br>
+> (Relation-Path Reasoning with Relational Heterogeneous Graph Transformer)结合关系路径推理和异构图转换器<br>
 > 建模关系路径<br>
 > 这项工作为EA引入了一个基于元路径的相似性框架 [2]。它认为在预对齐实体的邻域中经常出现的路径是可靠的
 
 #### 3.2.5 RAGA
-> RAGA（Relation-Aware Graph Attention Networks）采用关系感知的图注意力网络，捕获实体和关系之间的交互<br>
+> RAGA(Relation-Aware Graph Attention Networks)采用关系感知的图注意力网络，捕获实体和关系之间的交互<br>
 > 通过自注意力机制，将实体信息传播到关系，再将关系信息聚合回实体
 > 
 
