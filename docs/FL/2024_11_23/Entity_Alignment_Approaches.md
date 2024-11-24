@@ -507,3 +507,125 @@ This section presents an in-depth empirical study
 
 ## 3. Recent Advance of Representation Learning Stage
 
+> 近年来, 大量研究致力于学习更好的KG表示以促进实体对齐. 本章总结了 EA 表示学习阶段的最新进展, 并提供了详细的实证评估, 以揭示当前解决方案的优劣.
+
+### 3.1 Overview
+为更好地理解当前先进的表示学习方法, 我们提出了一个通用框架来描述这些方法, 包括六个模块:
+
+1. **Pre-Processing (预处理)**.
+2. **Messaging (消息传递)**.
+3. **Attention (注意力机制)**.
+4. **Aggregation (聚合)**.
+5. **Post-Processing (后处理)**.
+6. **Loss Function (损失函数)**.
+
+**workflow**:
+1. 在 **Pre-Processing** 阶段, 生成初始的实体和关系表示.
+2. 通过一个representation learning network获取KG representations, 该网络通常包括以下三个步骤:
+   - **Messaging**: 提取邻域元素的特征.
+   - **Attention**: estimate每个邻居的权重.
+   - **Aggregation**: 根据注意力权重integrates邻域信息.
+3. 通过 **Post-Processing**, 获取最终的representations.
+4. 在训练阶段, 使用Loss Function优化整个模型.
+
+<figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/2024-11-24-15-47-46.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 3.1: Overview and comparison of advanced representation learning</figcaption> </figure>
+
+##### **1. Pre-Processing**
+  1. 一些方法利用预训练模型to embed names or descriptions into initial representations.
+  2. 还有一些使用基于GNN的网络生成initial structural representations.
+
+##### **2. Messaging**
+   - **Linear Transformation**:
+      - 最常用，使用可学习矩阵to transform neighboring features.
+   - **其他方法**:
+      - extracting neighboring features by concatenating multihead messages
+      - directly utilizing neighboring representations.
+
+##### **3. Attention**
+- **核心任务**: 计算相似度.
+- Most of the methods concatenate the representations , 然后乘以learnable attention vector to calculate attention weights.
+- some use inner product of entity
+representations to compute similarity.
+
+##### **4. Aggregation**
+- **主要方法**:
+  - 几乎所有方法聚合 **1-hop** 邻域实体或关系信息.
+  - 少量方法提出结合multi-hop邻域信息.
+  - 一些方法使用随机选取的实体集合 (称为 **Anchor Set**) 以生成position-aware representations.
+
+##### **5. Post-Processing**
+- 大部分都采取拼接GNN所有层的输出以增强最终表示.
+- 一些方法通过比如Gate Mechanism (门控机制)等策略自适应地组合特征.
+
+##### **6. Loss Function**
+- 主流方法使用基于边界的损失函数 (**Margin-based Loss**) 进行训练.
+- 一些改进方法:
+  - 添加 **TransE** 损失.
+  - 使用 **LogSumExp** 和normalization operation.
+  - 使用 **Sinkhorn** 算法计算损失.
+
+### 3.2 Models
+
+使用下面公式来描述表示学习的核心过程:
+
+\[
+e^l_i = \text{Aggregation}_{\forall j \in N(i)} \big( \text{Attention}(i, j) \cdot \text{Messaging}(i, j) \big),
+\]
+
+其中:
+- **Messaging**: 提取邻域元素的特征.
+- **Attention**: estimate每个邻居的权重.
+- **Aggregation**: 将邻域信息与注意力权重整合.
+
+#### 3.2.1 ALiNet
+> （Alignment-aware Network）<br>
+> 解决KG中neighboring structure的非同构性问题<br>
+> It aims to aggregate multi-hop structural information for learning entity representations
+
+
+#### 3.2.2 MRAEA
+> (Multi-View Relation-Aware Entity Alignment)<br>
+> 利用多视角关系感知机制来捕获实体之间的复杂关系<br>
+> It proposes to utilize the relation information to facilitate the entity representation
+learning process
+
+
+#### 3.2.3 RREA
+> （Relation-aware Entity Alignment）通过引入关系感知的图注意力网络<br>
+> 采用自注意力机制，将实体信息传播到关系，再将关系信息聚合回实体<br>
+> It proposes to use relational reflection transformation to aggregate features for
+learning entity representations
+
+#### 3.2.4 RPR-RHGT
+> （Relation-Path Reasoning with Relational Heterogeneous Graph Transformer）结合关系路径推理和异构图转换器<br>
+> 建模关系路径<br>
+> 这项工作为EA引入了一个基于元路径的相似性框架 [2]。它认为在预对齐实体的邻域中经常出现的路径是可靠的
+
+#### 3.2.5 RAGA
+> RAGA（Relation-Aware Graph Attention Networks）采用关系感知的图注意力网络，捕获实体和关系之间的交互<br>
+> 通过自注意力机制，将实体信息传播到关系，再将关系信息聚合回实体
+> 
+
+
+
+#### 3.2.6 Dual-AMN
+
+#### 3.2.7 ERMC
+
+#### 3.2.8 KE-GCN
+
+#### 3.2.9 RePS
+
+#### 3.2.10 SDEA
+
+## 4. Recent Advance of Alignment Inference Stage
+
+## 5. Large-Scale Entity Alignment
+
+## 6. Long-Tail Entity Alignment
+
+## 7. Weakly Supervised Entity Alignment
+
+## 8. Unsupervised Entity Alignment
+
+## 9. Multimodal Entity Alignment
