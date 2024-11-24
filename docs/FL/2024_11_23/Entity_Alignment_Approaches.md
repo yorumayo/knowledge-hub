@@ -367,8 +367,7 @@
 
 **3. CEA**
 - **观察到的问题**:
-  - 不同entity alignment decisions之间存在相关性.
-  -> 如果一个目标实体已经高置信度匹配到某个源实体, 则不太可能再匹配到另一个源实体.
+  - 不同entity alignment decisions之间存在相关性, 如果一个目标实体已经高置信度匹配到某个源实体, 则不太可能再匹配到另一个源实体.
   - 将这种相关性建模为一个stable matching problem, 基于距离度量来解决该问题, 减少了错误匹配的数量, 提升了实体对齐的准确性.
 
 #### 2.2.4 Extra Information Module
@@ -499,7 +498,12 @@ This section presents an in-depth empirical study
   - 对所有方法中best **Hits@1** 的结果标记为▲, 因为该指标最能反映 EA 方法的有效性.
     > Hits@1 表示 Top-1 命中率: 在为每个源实体生成的目标实体排名列表中, 如果排名第一的目标实体是正确的对齐实体, 则视为命中. 然后计算所有源实体中命中的比例.
 
+
+
 <figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/2024-11-24-12-13-40.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 2.2: Experimental results on DBP15K</figcaption> </figure>
 
-### 4. 文章实验
-### 5. 总结&未来方向
+
+
+
+## 3. Recent Advance of Representation Learning Stage
+
