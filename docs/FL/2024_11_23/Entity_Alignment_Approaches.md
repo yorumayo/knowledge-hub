@@ -530,34 +530,34 @@ This section presents an in-depth empirical study
 
 <figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/2024-11-24-15-47-46.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 3.1: Overview and comparison of advanced representation learning</figcaption> </figure>
 
-##### **1. Pre-Processing**
+#### 3.1.1. Pre-Processing
   1. 一些方法利用预训练模型to embed names or descriptions into initial representations.
   2. 还有一些使用基于GNN的网络生成initial structural representations.
 
-##### **2. Messaging**
+#### 3.1.2. Messaging
    - **Linear Transformation**:
       - 最常用，使用可学习矩阵to transform neighboring features.
    - **其他方法**:
       - extracting neighboring features by concatenating multihead messages
       - directly utilizing neighboring representations.
 
-##### **3. Attention**
+#### 3.1.3. Attention
 - **核心任务**: 计算相似度.
 - Most of the methods concatenate the representations , 然后乘以learnable attention vector to calculate attention weights.
 - some use inner product of entity
 representations to compute similarity.
 
-##### **4. Aggregation**
+#### 3.1.4. Aggregation
 - **主要方法**:
   - 几乎所有方法聚合 **1-hop** 邻域实体或关系信息.
   - 少量方法提出结合multi-hop邻域信息.
   - 一些方法使用随机选取的实体集合 (称为 **Anchor Set**) 以生成position-aware representations.
 
-##### **5. Post-Processing**
+#### 3.1.5. Post-Processing
 - 大部分都采取拼接GNN所有层的输出以增强最终表示.
 - 一些方法通过比如Gate Mechanism (门控机制)等策略自适应地组合特征.
 
-##### **6. Loss Function**
+#### 3.1.6. Loss Function
 - 主流方法使用基于边界的损失函数 (**Margin-based Loss**) 进行训练.
 - 一些改进方法:
   - 添加 **TransE** 损失.
@@ -609,14 +609,24 @@ learning entity representations
 
 
 #### 3.2.6 Dual-AMN
+Dual-AMN（Dual Attention Matching Network）提出了一种新颖的图编码器，由简化关系注意力层和代理匹配注意力层组成。该编码器智能地对图内和跨图信息进行建模，同时大大降低了计算复杂度。
+
 
 #### 3.2.7 ERMC
+ERMC（Entity Representation with Multi-Context）通过引入多上下文信息，增强实体表示的丰富性。该方法结合结构、属性和描述信息，提高了实体对齐的效果。
+
 
 #### 3.2.8 KE-GCN
+KE-GCN（Knowledge Embedding with Graph Convolutional Networks）将知识嵌入与图卷积网络相结合，捕获实体的结构和语义信息。该方法通过融合多种信息源，提高了对齐性能。
+
 
 #### 3.2.9 RePS
+RePS（Relation Path Sampling）通过关系路径采样，捕获实体之间的深层次关系。该方法利用关系路径信息，增强了实体嵌入的表达能力，从而提高对齐精度。
+
 
 #### 3.2.10 SDEA
+SDEA（Self-Supervised Dual-Encoder Alignment）采用自监督的双编码器架构，进行实体对齐。该方法通过自监督学习，减少了对人工标注数据的依赖，提高了对齐效率。
+
 
 ### 3.3 Experiments
 
@@ -637,7 +647,107 @@ learning entity representations
 
 ## 5. Large-Scale Entity Alignment
 
+> Abstract<br>
+> 本章聚焦于大规模EA的概念, 并提出一种新的方法来解决这一任务. 该解决方案能够处理大规模的KG pairs, 并提供高质量的对齐结果.
+
+主要贡献包括:
+1. **Seed-Oriented Graph Partition Strategies**:
+   - 设计了一组种子导向的图划分策略, 将大规模 KG 对划分为较小的子图对.
+2. **Reciprocal Alignment Inference**:
+   - 在每个子图对内, 使用现有方法学习统一的实体表示, 并引入一种新的双向对齐推断策略来建模双向对齐交互, 从而提高对齐的准确性.
+3. **Variant Strategies for Scalability**:
+   - 为进一步提升双向对齐推断的可扩展性, 提出两种变体策略, 显著降低了内存和时间成本, 但略微降低了效果.
+4. **Versatility**:
+   - 该解决方案可以应用于现有基于表示学习的 EA 模型, 增强其处理大规模 KG 对的能力.
+5. **New Dataset**:
+   - 创建了一个包含数百万实体的新 EA 数据集.
+6. **Comprehensive Experiments**:
+   - 通过全面实验验证模型的效率.
+   - 在流行的 EA 数据集上与最先进的基线方法进行比较, 展示了模型的有效性和优越性.
+
+
+### 5.1 Introduction
+
+#### Overview of EA Pipeline
+- **Two-stage Pipeline**:
+  1. **Representation Learning**:
+     - 使用 **KG Embedding Models** (如 **TransE**, **GCN**) 学习实体嵌入表示.
+     - 利用种子实体对将不同 KG 的嵌入投射到一个公共嵌入空间.
+  2. **Alignment Inference**:
+     - 使用统一嵌入空间中的相似度或距离预测对齐结果.
+     - 常见方法: 根据相似度度量对目标 KG 的实体排序, 选择排名最高的目标实体作为匹配实体.
+
+<figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/2024-11-24-22-00-18.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;"> </figure>
+
+#### Challenges in Large-Scale EA
+- **计算资源需求高**:
+  - 当前技术需要大量参数, 且消耗大量计算资源.
+  - 例如, 在 **DWY100K** 数据集 (20 万实体) 上, 大多数方法的运行时间超过 **20,000 秒**, 一些方法甚至无法产生对齐结果.
+- **大规模 KG**:
+  - 真实场景中的 KG 往往包含数千万实体, 当前方法难以扩展, 需要研究大规模 EA.
+
+#### Proposed Solutions
+1. **Seed-Oriented Graph Partitioning**:
+   - 将大规模 KG 对划分为多个较小的子图对.
+   - 目标:
+     - 保留 KG 的原始结构.
+     - 确保源 KG 和目标 KG 的划分结果匹配, 即等价实体被分配到相同的子图对.
+   - **SBP (Seed-oriented Bidirectional Partition)**:
+     - 进行双向划分, 聚合源到目标和目标到源的划分结果, 以平衡结构完整性和对齐信号.
+     - 提出迭代变体 **I-SBP**, 利用上一轮的高置信度对齐结果改进划分性能.
+
+2. **Reciprocal Alignment Inference**:
+   - 建模实体的双向偏好:
+     - 传统的直接对齐推断方法 (Direct Alignment Inference) 仅考虑单向相似度, 忽略了反向对齐的影响.
+     - 提出双向偏好建模与整合, 通过生成互惠偏好矩阵来提升对齐精度.
+   - **Example**:
+     - 在 **Fig. 5.1a** 中, 使用直接对齐推断, **[A. Dessner]en** 和 **[B. Dessner]en** 都会与 **[A. Dessner]es** 匹配.
+     - 通过建模双向偏好 (如 **Fig. 5.1b** 所示), 可以避免错误匹配并识别正确的等价实体.
+
+3. **Variant Strategies for Efficiency**:
+   - 提出两种变体以提高效率:
+     - **No-Ranking Aggregation**: 在偏好聚合过程中移除排序过程.
+     - **Progressive Blocking**: 将实体分块, 在每块内进行对齐.
+
+#### LIME Framework
+- 提出了一种适用于大规模 EA 的框架 **LIME**:
+  - 通用模型: 可与任何实体表示学习模型结合使用.
+  - 评估:
+    - 在大规模数据集 **FB_DBP_2M** (包含数百万实体和数千万事实) 上进行实验验证.
+    - 与主流小规模数据集上的最先进方法比较, 展现出良好的性能.
+
+
+#### Contributions
+1. 确定了当前 EA 方法的扩展性问题, 并提出框架 **LIME** 解决大规模实体对齐.
+2. 提出 **Seed-Oriented Bidirectional Graph Partitioning** 方法, 将大规模 KG 对划分为较小子图对.
+3. 提出 **Reciprocal Alignment Inference**, 建模并整合实体的双向偏好以提升对齐精度.
+4. 引入两种变体, 提升扩展性, 同时保持较小的性能损失.
+5. **LIME** 通用性强, 可增强现有 EA 方法的扩展能力.
+6. 构建了一个包含数百万实体的新数据集, 并通过全面实验验证了模型的有效性.
+
+#### Organization
+- **Sect. 5.2**: LIME 框架概述.
+- **Sect. 5.3**: 图划分策略.
+- **Sect. 5.4**: 双向对齐推断策略.
+- **Sect. 5.5**: 对齐推断变体.
+- **Sect. 5.6**: 实验设置.
+- **Sect. 5.7**: 实验结果.
+- **Sect. 5.8**: 相关工作.
+- **Sect. 5.9**: 总结.
+
 ## 6. Long-Tail Entity Alignment
+> Abstract<br>
+> 当前的大多数EA方法主要依赖于KG的结构信息. 然而在真实世界的 KG 中, 大多数实体的邻域结构稀疏, 而仅少数实体与其他实体密集连接. 这些稀疏连接的实体被称为 **Long-Tail Entities** (长尾实体), 限制了结构信息在 EA 中的有效性.
+
+为了解决这一问题, 提出了以下创新:
+1. **Entity Name Information**:
+   - 引入实体名称作为信号源, 使用 **Concatenated Power Mean Word Embeddings** 增强长尾实体的弱结构信息.
+2. **Complementary Framework**:
+   - 结合结构和名称信号, 根据实体的度数动态调整两种信号的重要性, 提出 **Degree-Aware Co-Attention Network**.
+3. **Iterative Training**:
+   - 在后对齐阶段, 使用高置信度的对齐结果作为锚点, 通过迭代训练从目标 KG 补充源 KG 的事实信息, 从而改进对齐性能.
+
+
 
 ## 7. Weakly Supervised Entity Alignment
 
