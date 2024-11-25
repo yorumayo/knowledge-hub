@@ -4,5 +4,8 @@
   - [IntroToEA](/FL/2024_11_23/Entity_Alignment_Approaches.md)
   - [Federated_Transformer](/FL/2024_11_23/Federated_Transformer.md)
 - [MLLM](/MLLM/MLLM.md)
+  - [2024](/MLLM/MLLM.md)
+    - [12](/MLLM/MLLM.md)
+      - [T2V-CompBench](/MLLM/2024/12/T2V-CompBench.md)
   - [Clip](/MLLM/1_Clip)
   - [LLaVA](/MLLM/2_LLaVA)
