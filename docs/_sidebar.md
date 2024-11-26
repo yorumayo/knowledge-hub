@@ -1,11 +1,11 @@
 <!-- docs/_sidebar.md -->
 - [Home](README.md)
 - [FL](/FL/FL.md)
-  - [2024-11~12]
+  - [2024.11->12]
     - [IntroToEA](/FL/2024_11_12/Entity_Alignment_Approaches.md)
     - [Federated_Transformer](/FL/2024_11_12/Federated_Transformer.md)
 - [MLLM](/MLLM/MLLM.md)
-  - [2024-12](/MLLM/2024_12/2024_12.md)
+  - [2024.12](/MLLM/2024_12/2024_12.md)
     - [T2V-CompBench](/MLLM/2024_12/T2V-CompBench.md)
     - [PhysicalLaw](/MLLM/2024_12/Video_Generation_Physical_Law.md)
   - [Clip](/MLLM/1_Clip)
