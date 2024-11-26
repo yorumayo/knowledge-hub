@@ -1,7 +1,7 @@
 # Physical Law
 
 > How Far is Video Generation from World Model: A Physical Law Perspective
-> https://arxiv. org/abs/2411. 02385<br>
+> https://arxiv.org/abs/2411.02385<br>
 
 ## Abstract
 
@@ -64,7 +64,7 @@
      - > 分布外泛化：如果一个模型在看到训练数据中存在的某个小球在左边滚动，那么测试它的分布外泛化能力可能是考察它在看到小球从右边滚动时的表现。这里的挑战在于小球的运动方向不同于训练数据，但小球的其他特征保持不变。<br>
      - > 组合泛化：如果模型见过红色的小球和蓝色的方块，组合泛化会评估模型是否可以理解蓝色的小球或红色的方块。这要求模型理解“颜色”和“形状”是可以独立组合的，而不仅仅是记住原有的固定组合。
 
-<figure style="display: block; text-align: center;">   <img src="MLLM/2024_12/images/2024-11-26-19-40-35. png" at="name" style="display: block; margin: auto; width: 50%; height: auto;">
+<figure style="display: block; text-align: center;">   <img src="MLLM/2024_12/images/2024-11-26-19-40-35.png" at="name" style="display: block; margin: auto; width: 50%; height: auto;"></figure>
 
 4.  **复杂对象与运动的挑战**
    - 实际视频通常包含复杂的、非刚性 (non-rigid)对象和运动，这对定量评估 (quantitative evaluation)甚至人工验证 (human validation)来说都是重大挑战.
