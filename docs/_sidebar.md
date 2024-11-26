@@ -1,7 +1,7 @@
 <!-- docs/_sidebar.md -->
 - [Home](README.md)
 - [FL](/FL/FL.md)
-  - [2024.11->12]
+  - [2024.11->12](/FL/2024_11_12/2024_11_12.md)
     - [IntroToEA](/FL/2024_11_12/Entity_Alignment_Approaches.md)
     - [Federated_Transformer](/FL/2024_11_12/Federated_Transformer.md)
 - [MLLM](/MLLM/MLLM.md)
