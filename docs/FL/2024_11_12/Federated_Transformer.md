@@ -463,7 +463,7 @@
      - 在聚合阶段添加噪声保护 (第 12 行).
    - 详见 **Section 6**.
 
-<figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/images/2024-11-25-10-52-25.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;"></figure>
+<figure style="display: block; text-align: center;">   <img src="FL/2024_11_12/images/2024-11-25-10-52-25.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;"></figure>
 
 ### 7.2 Performance
 

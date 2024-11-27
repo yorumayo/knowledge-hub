@@ -199,7 +199,7 @@
 本节提出了一个通用的 **Entity Alignment (EA)** 框架, 用于涵盖最先进的 EA 方法. 通过对当前 EA 方法的深入分析, 我们识别出了以下四个主要组件, 如 Fig 2.1所示:
 
 <figure style="display: block; text-align: center;">
-  <img src="FL/2024_11_23/2_1.png" alt="A general EA framework" style="display: block; margin: auto; width: 50%; height: auto;">
+  <img src="FL/2024_11_12/images/2_1.png" alt="A general EA framework" style="display: block; margin: auto; width: 50%; height: auto;">
   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Figure 2.1: A general EA framework</figcaption>
 </figure>
 
@@ -261,7 +261,7 @@
   - 根据 EA 框架中的各模块对最先进的方法进行了分类, 并将它们呈现在 **Table 2.1** 中.
   - 有关这些方法的更详细信息, 读者可以参考附录.
   - 接下来, 我们将解释这些模块如何在各种最先进的方法中实现.
-<figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/2024-11-23-23-08-34.png" alt="Table 2.1" style="display: block; margin: auto; width: 50%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 2.1: A summary of EA approaches</figcaption> </figure>
+<figure style="display: block; text-align: center;">   <img src="FL/2024_11_12/images/2024-11-23-23-08-34.png" alt="Table 2.1" style="display: block; margin: auto; width: 50%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 2.1: A summary of EA approaches</figcaption> </figure>
 
 #### 2.2.1 Embedding Learning Module
 
@@ -500,7 +500,7 @@ This section presents an in-depth empirical study
 
 
 
-<figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/2024-11-24-12-13-40.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 2.2: Experimental results on DBP15K</figcaption> </figure>
+<figure style="display: block; text-align: center;">   <img src="FL/2024_11_12/images/2024-11-24-12-13-40.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 2.2: Experimental results on DBP15K</figcaption> </figure>
 
 
 
@@ -528,7 +528,7 @@ This section presents an in-depth empirical study
 3. 通过 **Post-Processing**, 获取最终的representations.
 4. 在训练阶段, 使用Loss Function优化整个模型.
 
-<figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/2024-11-24-15-47-46.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 3.1: Overview and comparison of advanced representation learning</figcaption> </figure>
+<figure style="display: block; text-align: center;">   <img src="FL/2024_11_12/images/2024-11-24-15-47-46.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;">   <figcaption style="margin-top: 8px; font-size: 14px; color: #555;">Table 3.1: Overview and comparison of advanced representation learning</figcaption> </figure>
 
 #### 3.1.1. Pre-Processing
   1. 一些方法利用预训练模型to embed names or descriptions into initial representations.
@@ -677,7 +677,7 @@ SDEA（Self-Supervised Dual-Encoder Alignment）采用自监督的双编码器�
      - 使用统一嵌入空间中的相似度或距离预测对齐结果.
      - 常见方法: 根据相似度度量对目标 KG 的实体排序, 选择排名最高的目标实体作为匹配实体.
 
-<figure style="display: block; text-align: center;">   <img src="FL/2024_11_23/2024-11-24-22-00-18.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;"> </figure>
+<figure style="display: block; text-align: center;">   <img src="FL/2024_11_12/images/2024-11-24-22-00-18.png" alt="name" style="display: block; margin: auto; width: 100%; height: auto;"> </figure>
 
 #### Challenges in Large-Scale EA
 - **计算资源需求高**:
